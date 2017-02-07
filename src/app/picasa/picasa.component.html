@@ -1,0 +1,23 @@
+<!--component html goes here -->
+<!--
+<h1>{{ albumTitle }}</h1>
+-->
+<div id='albumSelection'>
+    <label for='albumSelect'>Select Album:</label>
+    <select id='albumSelect' (change)="changeAlbum($event.target.value)">
+        <option *ngFor="let album of albums of albums" [value]="album.name" [selected]="selectedAlbum && selectedAlbum.name == album.name" >{{album.name}}</option> 
+    </select>
+</div>
+
+<div id='images' *ngIf="selectedAlbum">
+    <img (click)="selectImage(image)" *ngFor="let image of selectedAlbum.images" [src]="image.url" /> 
+</div>
+
+<modal #modal size='lg'>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <img [src]="selectedAlbumImage ? selectedAlbumImage.url : '#'" />
+    </modal-body>
+    <modal-footer [show-default-buttons]="false"></modal-footer>
+</modal>

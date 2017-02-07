@@ -21,7 +21,7 @@ module.exports = function (config) {
     exclude: [],
 
     client: {
-      captureConsole: false
+      //captureConsole: false
     },
 
     /*

@@ -1,0 +1,21 @@
+#albumSelection{
+    margin:0 auto;
+    display: block;
+    text-align: center;
+}
+#images{
+   width:100%;
+   margin: 0 auto;
+   text-align: center;
+}
+#images img{
+    width: 23%;
+    margin: .3em;
+    vertical-align: top;
+}
+
+modal img{
+    width:95%;
+    display: block;
+    margin: auto;
+}
