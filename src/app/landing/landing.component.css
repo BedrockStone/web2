@@ -1,0 +1,17 @@
+h1{
+    text-align: center;
+}
+#landing{
+    text-align: center;
+    vertical-align: top;
+}
+#landing div{
+   display: inline-block;
+   width:40%;
+   margin:.3em;
+   vertical-align: top;
+}
+#landing img{
+    display: block;
+    width:100%; 
+}

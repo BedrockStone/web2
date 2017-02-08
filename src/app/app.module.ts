@@ -27,6 +27,7 @@ import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 import { PicasaComponent } from './picasa';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { LandingComponent } from './landing';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -53,6 +54,7 @@ type StoreType = {
     AppComponent,
     PicasaComponent,
     NoContentComponent,
+    LandingComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

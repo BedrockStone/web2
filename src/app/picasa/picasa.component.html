@@ -6,10 +6,13 @@
     <label for='albumSelect'>Select Album:</label>
     <select id='albumSelect' (change)="changeAlbum($event.target.value)">
         <option *ngFor="let album of albums of albums" [value]="album.name" [selected]="selectedAlbum && selectedAlbum.name == album.name" >{{album.name}}</option> 
+        <option value='eldorado'>Eldorado Visualizer</option>
     </select>
+    <span> | </span>
+    <a href="#">Back to Landing</a>
 </div>
 
-<div id='images' *ngIf="selectedAlbum">
+<div id='images' *ngIf="selectedAlbum && selectedAlbumId !== 'eldorado'">
     <img (click)="selectImage(image)" *ngFor="let image of selectedAlbum.images" [src]="image.url" /> 
 </div>
 
@@ -21,3 +24,4 @@
     </modal-body>
     <modal-footer [show-default-buttons]="false"></modal-footer>
 </modal>
+<iframe *ngIf="selectedAlbumId === 'eldorado'" src="http://eldorado.renoworks.com" width="100%" height="900px"></iframe> 

@@ -1,9 +1,12 @@
 import { Component, OnInit, Injectable, ViewChild }        from '@angular/core';
+import { Location } from '@angular/common';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Http, Response }                       from '@angular/http';
 import { Observable }                           from 'rxjs/Observable';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 import { PicasaService } from './picasa.service';
 import { Album }   from './album';
@@ -26,14 +29,19 @@ export class PicasaComponent implements OnInit {
     private columns: number = 4;
     private fakeImageUrl: string =
     'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-    constructor(private http: Http, private picasa: PicasaService ) { }
+    constructor(private http: Http, private picasa: PicasaService, private route: ActivatedRoute, private location: Location ) { }
     public ngOnInit() {
+       let albumId = this.route.snapshot.params['albumId'] || 'Type of Products';
        this.picasa.getAlbums().subscribe( (x) => this.albums = x);
-       this.changeAlbum('Type of Products');
+       this.changeAlbum(albumId);
     }
 
     public changeAlbum(name) {
         this.selectedAlbumId = name;
+        if(name === 'eldorado'){
+            return;
+        }
+        
         this.picasa.getAlbum(this.selectedAlbumId)
             .subscribe((album) => {
                 // push in fake images so we get nice alignment
