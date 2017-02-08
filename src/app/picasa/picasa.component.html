@@ -10,10 +10,11 @@
     </select>
     <span> | </span>
     <a href="#">Back to Landing</a>
+    
 </div>
 
 <div id='images' *ngIf="selectedAlbum && selectedAlbumId !== 'eldorado'">
-    <img (click)="selectImage(image)" *ngFor="let image of selectedAlbum.images" [src]="image.url" /> 
+    <img [style.width] ="imgWidthPct + '%'" (click)="selectImage(image)" *ngFor="let image of selectedAlbum.images" [src]="image.url" /> 
 </div>
 
 <modal #modal size='lg'>

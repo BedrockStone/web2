@@ -1,4 +1,4 @@
-import { Component,  OnInit} from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { PicasaService } from '../picasa/picasa.service';
 import { LandingItem } from './landingItem';
 @Component({
@@ -7,23 +7,25 @@ import { LandingItem } from './landingItem';
     styleUrls: ['landing.component.css'],
     providers: [PicasaService]
 })
-export class LandingComponent implements OnInit{
-    public landingItems: Array<LandingItem>;
-    constructor(private picasa: PicasaService){
-
-    }
-    public ngOnInit(){
+export class LandingComponent implements OnInit {
+    public landingItems: LandingItem[];
+    constructor(private picasa: PicasaService) {}
+    public ngOnInit() {
+        /* tslint:disable */
         this.landingItems = [
             {
-                name:'Thin Veneer', 
-                url: '#/album/Thin Veneer',
-                imageUrl: 'https://s3.amazonaws.com/picasa-exports/Thin%20Veneer/images/tv100.jpg'
+                name: 'Natural Stone',
+                url: '#/album/Select Veneer',
+                imageUrl:
+                `https://s3.amazonaws.com/picasa-exports/Select%20Veneer/images/ariz_buckskin_036.jpg`
             },
             {
-                name:'Eldorado',
-                url:'#/album/eldorado',
-                imageUrl:'http://eldorado.renoworks.com/sites/eldorado/img/background.jpg'
+                name: 'Eldorado',
+                url: '#/album/eldorado',
+                imageUrl:
+                'http://eldorado.renoworks.com/sites/eldorado/img/background.jpg'
             },
         ];
+        /* tsLint:enable */
     }
 }

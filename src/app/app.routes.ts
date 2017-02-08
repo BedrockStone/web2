@@ -8,6 +8,7 @@ import { DataResolver } from './app.resolver';
 export const ROUTES: Routes = [
   { path: '', component: LandingComponent },
   { path: 'albums', component: PicasaComponent},
-  { path: 'album/:albumId', component: PicasaComponent},
+  { path: 'album/:albumId/:childAlbum', component: PicasaComponent },
+  { path: 'album/:albumId', component: PicasaComponent },
   { path: '**',    component: NoContentComponent },
 ];

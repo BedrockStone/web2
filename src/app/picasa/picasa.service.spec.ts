@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { albumImagesResults } from './getAlbumRestResults';
+import { getAlbumResults } from './getAlbumResults';
 import {
   inject,
   async,
@@ -23,7 +23,14 @@ import {
 // Load the implementations that should be tested
 import { AppState } from '../app.service';
 import { PicasaService } from './picasa.service';
-
+function setupService(backend: MockBackend) {
+    backend.connections.subscribe((connection: MockConnection) => {
+        let options = getAlbumResults[connection.request.url] || {status: 404};
+        const responseOptions = new ResponseOptions(options);
+        const response = new Response(responseOptions);
+        connection.mockRespond(response);
+    });
+}
 describe(`Service: PicasaService.getAlbums`, () => {
     let backend: MockBackend;
     let service: PicasaService;
@@ -49,41 +56,33 @@ describe(`Service: PicasaService.getAlbums`, () => {
         const testbed = getTestBed();
         backend = testbed.get(MockBackend);
         service = testbed.get(PicasaService);
+        setupService(backend);
     }));
-    function setupConnections(xhrBackend: MockBackend, options: any) {
-        backend.connections.subscribe((connection: MockConnection) => {
-        const responseOptions = new ResponseOptions(options);
-        const response = new Response(responseOptions);
-
-        connection.mockRespond(response);
-        });
-    }
-    let restResults = {
-            body: `<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-                        <Name>picasa-exports</Name>
-                        <Prefix/>
-                        <Marker/>
-                        <MaxKeys>1000</MaxKeys>
-                        <Delimiter>/</Delimiter>
-                        <IsTruncated>false</IsTruncated>
-                        <CommonPrefixes>
-                        <Prefix>Archways &amp; Columns/</Prefix>
-                        </CommonPrefixes>
-                    </ListBucketResult>`,
-            status: 200};
-
     it('should return the correct number of albums', () => {
-        setupConnections(backend, restResults );
         service.getAlbums().subscribe( (albums) => {
-            expect(albums.length).toBe(1);
+            expect(albums.length).toBe(2);
         });
     });
 
-    it('should return an album that was properly serialized', () => {
-        setupConnections(backend, restResults);
+    it('should return albums that are properly serialized', () => {
         service.getAlbums().subscribe( (albums) => {
-            console.log(JSON.stringify(albums));
-            expect(albums[0].name).toBe('Archways & Columns');
+            // console.log(JSON.stringify(albums));
+            expect(albums.find( (a) => a.name === 'Type of Project')).toBeTruthy();
+            expect(albums.find( (a) => a.name === 'Type of Products')).toBeTruthy();
+        });
+    });
+    xit('should give a cover image', () => {
+        service.getAlbums('Type of Project').subscribe( (albums) => {
+            albums.forEach((album) => {
+                expect(album.image).toContain(service.baseUrl);
+                expect(album.image.endsWith('.jpg')).toBeTruthy();
+            });
+        });
+    });
+    it('can get child albums', () => {
+         service.getAlbums('Type of Project').subscribe( (albums) => {
+            // console.log(JSON.stringify(albums));
+            expect(albums.find( (a) => a.name === 'Pools')).toBeTruthy();
         });
     });
 });
@@ -113,41 +112,36 @@ describe(`Service: PicasaService.getAlbum`, () => {
         const testbed = getTestBed();
         backend = testbed.get(MockBackend);
         service = testbed.get(PicasaService);
+        setupService(backend);
     }));
-    function setupConnections(xhrBackend: MockBackend, options: any) {
-        backend.connections.subscribe((connection: MockConnection) => {
-            const responseOptions = new ResponseOptions(options);
-            const response = new Response(responseOptions);
-            connection.mockRespond(response);
-        });
-    }
     it('should return mapped images', () => {
-        setupConnections(backend, albumImagesResults);
-        service.getAlbum('Boulders').subscribe( (album) => {
+        service.getAlbum('Type of Products').subscribe( (album) => {
             let images = album.images;
             ///this is just an image that exists in the getAlbumRestResults file
-            expect(images.find((i) => i.url === service.baseUrl + 'Boulders/images/bl100.jpg'))
-                .toBeTruthy();
+            expect(images.find((i) => i.url === service.baseUrl
+            + 'Type of Products/images/product1.jpg')).toBeTruthy();
+        });
+    });
+    it('should populate album name', () => {
+        service.getAlbum('Type of Products').subscribe( (album) => {
+            expect(album.name).toBe('Type of Products');
         });
     });
     it('should filter out non jpgs', () => {
-        setupConnections(backend, albumImagesResults);
-        service.getAlbum('Boulders').subscribe((album) => {
+        service.getAlbum('Type of Products').subscribe((album) => {
             let images = album.images;
             expect(images.find((i) => !i.url.endsWith('.jpg'))).toBeFalsy();
 
         });
     });
     it('should not include thumbnails', () => {
-        setupConnections(backend, albumImagesResults);
-        service.getAlbum('Boulders').subscribe((album) => {
+        service.getAlbum('Type of Products').subscribe((album) => {
             let images = album.images;
             expect(images.find((i) => i.url.indexOf('/thumbnails') > 0)).toBeFalsy();
         });
     });
     it('should prefix all images with baseUrl', () => {
-        setupConnections(backend, albumImagesResults);
-        service.getAlbum('Boulders').subscribe((album) => {
+        service.getAlbum('Type of Products').subscribe((album) => {
             let images = album.images;
             expect(images.find((i) => i.url.indexOf(service.baseUrl) !== 0)).toBeFalsy();
         });

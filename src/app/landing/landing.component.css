@@ -1,6 +1,12 @@
 h1{
     text-align: center;
 }
+a {
+    color:#000000;
+}
+a:hover{
+    text-decoration: none;
+}
 #landing{
     text-align: center;
     vertical-align: top;
