@@ -44,6 +44,11 @@ export class PicasaComponent implements OnInit {
     public ngOnInit() {
         this.imgWidthPct = Math.round(100 / this.columns) - 1;
         this.modal.onDismiss.subscribe(() => {
+            console.log(JSON.stringify(this.selectedAlbumImage));
+            if (!this.selectedAlbumImage.dirty) {
+                return;
+            }
+            this.selectedAlbumImage.dirty = false;
             this.selectedAlbumImage.relativeUrl =
             this.selectedAlbumImage.url
                 .replace(this.picasa.baseUrl + this.picasa.defaultPrefix, '');

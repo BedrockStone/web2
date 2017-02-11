@@ -38,8 +38,10 @@ export class ImageDetailsService {
         this.imageDetails[imageUrl] = imageDetail;
         this.http.put(this.url, JSON.stringify(this.imageDetails)).subscribe((x) => {
             // what to do here
+            console.log('res:', JSON.stringify(x));
         }, (err) => {
             // what to do here
+            console.log('ERROR: ', JSON.stringify(err));
         });
     }
     private mapResults(allImageDetails, imageUrl) {

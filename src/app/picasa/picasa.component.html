@@ -22,14 +22,14 @@
 <modal #modal size='lg'>
     <modal-header [show-close]="true">
         <h3>
-            <input *ngIf="selectedAlbumImage" [(ngModel)]="selectedAlbumImage.title" />
+            <input *ngIf="selectedAlbumImage" [(ngModel)]="selectedAlbumImage.title" (change)="selectedAlbumImage.dirty = true" />
         </h3>
     </modal-header>
     <modal-body>
         <img [src]="selectedAlbumImage ? selectedAlbumImage.url : '#'" />
     </modal-body>
     <modal-footer [show-default-buttons]="false">
-        <input *ngIf="selectedAlbumImage" [(ngModel)]="selectedAlbumImage.key" />
+        <input *ngIf="selectedAlbumImage" [(ngModel)]="selectedAlbumImage.key" (change)="selectedAlbumImage.dirty = true" />
     </modal-footer>
 </modal>
 <iframe *ngIf="selectedAlbumId === 'Eldorado Thin Veneer'" src="http://eldorado.renoworks.com" width="100%" height="900px"></iframe> 
