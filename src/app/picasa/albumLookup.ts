@@ -4,7 +4,7 @@ export const AlbumLookup = {
     '/Type of Products/images/product13.jpg': 'Type of Products/River Rock',
     '/Type of Products/images/product14.jpg': 'Type of Products/Thin Veneer',
     '/Type of Products/images/product15.jpg': 'Type of Products/Tumbled',
-    '/Type of Products/images/product2.jpg': 'Type%20of%20Products/Benches%20&%20Tables',
+    '/Type of Products/images/product2.jpg': 'Type of Products/Benches & Tables',
     '/Type of Products/images/product3.jpg': 'Type of Products/Boulders/',
     '/Type of Products/images/product4.jpg': 'Type of Products/Building Stones-Chop',
     '/Type of Products/images/product5.jpg': 'Type of Products/Drystack',
@@ -25,5 +25,6 @@ export const AlbumLookup = {
     '/Type of Project/images/project7.jpg': 'Type of Project/Landscaping',
     '/Type of Project/images/project8.jpg': 'Type of Project/Ledge Look',
     '/Type of Project/images/project9_tif.jpg': 'Type of Project/Outdoor Kitchens',
-    
+    '/images/product1.jpg': 'Type of Products',
+    '/images/project1.jpg': 'Type of Project',
 };

@@ -65,7 +65,9 @@
     "webdriver:start": "npm run webdriver-manager start",
     "webdriver:update": "webdriver-manager update",
     "webpack-dev-server": "webpack-dev-server",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "deploy": "aws --profile bedrock s3 sync dist s3://kiosk.austinrockyard.com"
+    
   },
   "dependencies": {
     "@angular/common": "~2.4.3",

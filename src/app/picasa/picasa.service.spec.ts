@@ -23,6 +23,8 @@ import {
 // Load the implementations that should be tested
 import { AppState } from '../app.service';
 import { PicasaService } from './picasa.service';
+import { ImageDetailsService } from './imageDetails.service';
+
 function setupService(backend: MockBackend) {
     backend.connections.subscribe((connection: MockConnection) => {
         let options = getAlbumResults[connection.request.url] || {status: 404};
@@ -39,6 +41,7 @@ describe(`Service: PicasaService.getAlbums`, () => {
             providers: [
                 BaseRequestOptions,
                 MockBackend,
+                ImageDetailsService,
                 PicasaService,
                 {
                     deps: [
@@ -71,15 +74,9 @@ describe(`Service: PicasaService.getAlbums`, () => {
             expect(albums.find( (a) => a.name === 'Type of Products')).toBeTruthy();
         });
     });
-    xit('should give a cover image', () => {
-        service.getAlbums('Type of Project').subscribe( (albums) => {
-            albums.forEach((album) => {
-                expect(album.image).toContain(service.baseUrl);
-                expect(album.image.endsWith('.jpg')).toBeTruthy();
-            });
-        });
-    });
-    it('can get child albums', () => {
+    // We don't ever use this. Probably should just delete the whole function, but
+    // for now I wanna leave it, because it has some good logic there.
+    xit('can get child albums', () => {
          service.getAlbums('Type of Project').subscribe( (albums) => {
             // console.log(JSON.stringify(albums));
             expect(albums.find( (a) => a.name === 'Pools')).toBeTruthy();
@@ -95,6 +92,7 @@ describe(`Service: PicasaService.getAlbum`, () => {
             providers: [
                 BaseRequestOptions,
                 MockBackend,
+                ImageDetailsService,
                 PicasaService,
                 {
                     deps: [
