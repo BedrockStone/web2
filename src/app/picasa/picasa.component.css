@@ -8,10 +8,23 @@
    margin: 0 auto;
    text-align: center;
 }
-#images img{
+#images div{
     margin: .3em;
+    padding: 2px;
     vertical-align: top;
-    object-fit: cover;
+    overflow: hidden;
+    height: 264px;
+    display: inline-block;
+    border: solid 1px #fff;
+}
+#images div:hover {
+    border: solid 1px #337ab7;
+    cursor: pointer;
+}
+
+#images div b{
+    display: block;
+    height:18px;
 }
 
 modal img{

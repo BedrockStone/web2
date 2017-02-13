@@ -16,7 +16,11 @@
 </div>
 
 <div id='images' *ngIf="selectedAlbum && selectedAlbumId !== 'eldorado'">
-    <img [style.width] ="imgWidthPct + '%'" (click)="selectImage(image)" *ngFor="let image of selectedAlbum.images" [src]="image.url.replace('1024','640')" /> 
+    <!-- <img [style.width] ="imgWidthPct + '%'" (click)="selectImage(image)" *ngFor="let image of selectedAlbum.images" [src]="image.url.replace('1024','640')" />  -->
+    <div [style.width] ="imgWidthPct + '%'" (click)="selectImage(image)" *ngFor="let image of selectedAlbum.images">
+        <b>{{ image.title }}</b>
+        <img style="width: 100%" [src]="image.url.replace('1024', '640')" />
+    </div> 
 </div>
 
 <modal #modal size='lg'>
