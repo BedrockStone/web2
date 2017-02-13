@@ -10,6 +10,7 @@ export const AlbumLookup = {
     '/Type of Products/images/product5.jpg': 'Type of Products/Drystack',
     '/Type of Products/images/product6.jpg': 'Type of Products/Flagstone',
     '/Type of Products/images/product7.jpg': 'Type of Products/Landscaping Soil, Sand & Gravel',
+    '/Type of Products/images/product12_tif.jpg': 'Type of Products/Pool Coping',
     '/Type of Project/images/project10.jpg': 'Type of Project/Outdoor Living',
     '/Type of Project/images/project11.jpg': 'Type of Project/Patio',
     '/Type of Project/images/project12.jpg': 'Type of Project/Pavers',

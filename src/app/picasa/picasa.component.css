@@ -13,7 +13,7 @@
     padding: 2px;
     vertical-align: top;
     overflow: hidden;
-    height: 264px;
+    max-height: 264px;
     display: inline-block;
     border: solid 1px #fff;
 }
